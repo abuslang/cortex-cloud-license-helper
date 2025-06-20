@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex Cloud License Estimator</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cortex Cloud License Estimator</h1>
+            <p>Estimate the workload coverage you need for your cloud environment.</p>
+        </header>
+        <main>
+            <form id="license-form">
+                <div class="form-grid">
+                    <!-- Asset Category Inputs -->
+                    <div class="form-group">
+                        <label for="vms-no-containers">VMs (not running containers)</label>
+                        <input type="number" id="vms-no-containers" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="vms-with-containers">VMs (running containers)</label>
+                        <input type="number" id="vms-with-containers" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="caas">CaaS (Managed Containers)</label>
+                        <input type="number" id="caas" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="serverless">Serverless Functions</label>
+                        <input type="number" id="serverless" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="container-images">Container Images in Registries</label>
+                        <input type="number" id="container-images" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="cloud-buckets">Cloud Buckets</label>
+                        <input type="number" id="cloud-buckets" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="paas-db">Managed Cloud Database (PaaS)</label>
+                        <input type="number" id="paas-db" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="dbaas">DBaaS (TB Stored)</label>
+                        <input type="number" id="dbaas" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="saas-users">SaaS Users</label>
+                        <input type="number" id="saas-users" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="unmanaged-services">Cloud ASM - Unmanaged Services</label>
+                        <input type="number" id="unmanaged-services" min="0" value="0">
+                    </div>
+                </div>
+                <button type="button" id="calculate-btn">Calculate Workloads</button>
+            </form>
+            <div id="results" class="hidden">
+                <h2>Estimated Workloads: <span id="total-workloads">0</span></h2>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Your Company. For estimation purposes only.</p>
+        </footer>
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html> 
