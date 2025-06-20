@@ -103,4 +103,11 @@ echo "Manual Entry Required For:"
 echo " - SaaS Users"
 echo " - Cloud ASM - Unmanaged Services"
 echo "-----------------------------------------------------"
+
+# --- Auto-populate Code Generation ---
+AUTO_POPULATE_CODE="vms:$TOTAL_EC2_INSTANCES,caas:$TOTAL_ECS_TASKS,sls:$TOTAL_LAMBDA_FUNCTIONS,img:$TOTAL_ECR_IMAGES,bkt:$S3_BUCKETS,paas:$TOTAL_RDS_INSTANCES,dbaas_gb:$TOTAL_RDS_STORAGE_GB"
+echo ""
+echo "Auto-Populate Code (copy and paste this into the web tool):"
+echo "$AUTO_POPULATE_CODE"
+echo "-----------------------------------------------------"
 echo "Script Finished." 

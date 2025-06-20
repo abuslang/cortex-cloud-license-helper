@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalWorkloadsSpan = document.getElementById('total-workloads');
     const form = document.getElementById('license-form');
 
+    // Auto-populate elements
+    const autoPopulateCodeInput = document.getElementById('auto-populate-code');
+    const populateBtn = document.getElementById('populate-btn');
+
     const inputs = {
         vmsNoContainers: document.getElementById('vms-no-containers'),
         vmsWithContainers: document.getElementById('vms-with-containers'),
@@ -28,8 +32,55 @@ document.addEventListener('DOMContentLoaded', () => {
         UnmanagedServices: 4,
     };
 
+    function populateFormFromCode() {
+        const code = autoPopulateCodeInput.value.trim();
+        if (!code) return;
+
+        // Reset fields that aren't in the code
+        inputs.vmsWithContainers.value = 0;
+        inputs.saasUsers.value = 0;
+        inputs.unmanagedServices.value = 0;
+
+        const pairs = code.split(',');
+        pairs.forEach(pair => {
+            const [key, value] = pair.split(':');
+            const numValue = parseInt(value, 10);
+
+            switch (key) {
+                case 'vms':
+                    inputs.vmsNoContainers.value = numValue;
+                    break;
+                case 'caas':
+                    inputs.caas.value = numValue;
+                    break;
+
+                case 'sls':
+                    inputs.serverless.value = numValue;
+                    break;
+                case 'img':
+                    inputs.containerImages.value = numValue;
+                    break;
+                case 'bkt':
+                    inputs.cloudBuckets.value = numValue;
+                    break;
+                case 'paas':
+                    inputs.paasDb.value = numValue;
+                    break;
+                case 'dbaas_gb':
+                    // Convert GB to TB for the input, rounding to 2 decimal places
+                    const tbValue = Math.round((numValue / 1024) * 100) / 100;
+                    inputs.dbaas.value = tbValue;
+                    break;
+            }
+        });
+
+        // Trigger calculation after populating
+        calculateWorkloads();
+    }
+
     function getValue(element) {
-        return parseInt(element.value, 10) || 0;
+        // Use parseFloat to handle decimals from TB conversion
+        return parseFloat(element.value) || 0;
     }
 
     function calculateWorkloads() {
@@ -85,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     calculateBtn.addEventListener('click', calculateWorkloads);
+    populateBtn.addEventListener('click', populateFormFromCode);
 
     // Recalculate on any input change for real-time feedback
     Object.values(inputs).forEach(input => {
