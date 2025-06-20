@@ -1,5 +1,8 @@
 # Cortex Cloud Workload Estimator
 
+!!!! NOT OFFICIALL !!!!
+community support
+
 **[Live Demo](https://abuslang.github.io/cortex-cloud-license-helper/)**
 
 ## Overview
