@@ -25,28 +25,6 @@ The estimator provides a user-friendly interface to calculate license needs.
 3.  Input the quantity for each asset category based on your environment's inventory.
 4.  The **Estimated Workloads** total will update in real-time at the bottom of the page.
 
----
-
-## License Calculation Logic
-
-The total workload is the sum of workloads calculated for each asset category. The calculation logic is as follows:
-
-| Asset Category                      | Billable Unit per 1 Workload                                |
-| ----------------------------------- | ----------------------------------------------------------- |
-| VMs (not running containers)        | 1 VM                                                        |
-| VMs (running containers)            | 1 VM                                                        |
-| CaaS (Container as a Service)       | 10 Managed Containers                                       |
-| Serverless Functions                | 25 Serverless Functions                                     |
-| Container Images in Registries      | 10 additional scans*                                        |
-| Cloud Buckets                       | 10 Cloud Buckets                                            |
-| Managed Cloud Database (PaaS)       | 2 PaaS Databases                                            |
-| DBaaS (Database as a Service)       | 1 TB Stored                                                 |
-| SaaS Users                          | 10 SaaS Users                                               |
-| Cloud ASM - Unmanaged Services      | 4 Unmanaged Assets                                          |
-
-*\*A free quota of 10 container image scans is provided for each deployed VM and CaaS workload.*
-
----
 
 ## AWS Asset Inventory Script (`aws_inventory.sh`)
 
