@@ -1,0 +1,1 @@
+# cortex-cloud-license-helper
