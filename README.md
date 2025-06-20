@@ -97,6 +97,10 @@ Create a new IAM policy with the following JSON definition:
     ```
 The script will output a summary of discoverable assets. Copy these values into the web estimator.
 
+### Cost
+
+Running the `aws_inventory.sh` script does not incur any direct costs. The script exclusively uses read-only API calls (`describe-*`, `list-*`) that are included within the AWS Free Tier and are not billable for standard usage. The script does not create, modify, or enable any billable AWS resources.
+
 ### Script Limitations
 - The script cannot automatically distinguish between VMs running containers and those that are not. You must manually allocate the total EC2 instance count between the two relevant categories in the estimator.
 - **SaaS Users** and **Cloud ASM - Unmanaged Services** are not automatically discoverable and must be entered manually based on your organization's data.
