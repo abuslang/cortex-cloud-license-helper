@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# aws_inventory_no_deps.sh
+# aws_inventory.sh
 #
 # This script collects asset inventory from an AWS account to be used with the
 # Cortex Cloud License Estimator. It is designed to be run in any environment
@@ -55,7 +55,7 @@ for region in $REGIONS; do
     done
 
     # Lambda Functions
-    LAMBDA_COUNT=$(aws lambda list-functions --region "$region" --query "length(Functions[])" --output text 2>/dev/null || echo 0)
+    LAMBDA_COUNT=$(aws lambda list-functions --region "$region" --query "length(Functions[])" 2>/dev/null || echo 0)
     TOTAL_LAMBDA_FUNCTIONS=$((TOTAL_LAMBDA_FUNCTIONS + LAMBDA_COUNT))
 
     # ECR Images
@@ -66,15 +66,18 @@ for region in $REGIONS; do
     done
 
     # RDS DB Instances
-    RDS_INSTANCES_INFO=$(aws rds describe-db-instances --region "$region" --query "DBInstances[].[DBInstanceIdentifier, AllocatedStorage]" --output text 2>/dev/null)
-    if [ -n "$RDS_INSTANCES_INFO" ]; then
-        while read -r line; do
-            TOTAL_RDS_INSTANCES=$((TOTAL_RDS_INSTANCES + 1))
-            STORAGE_GB=$(echo "$line" | awk '{print $NF}')
-            if [[ "$STORAGE_GB" =~ ^[0-9]+$ ]]; then
-                TOTAL_RDS_STORAGE_GB=$((TOTAL_RDS_STORAGE_GB + STORAGE_GB))
+    RDS_COUNT_IN_REGION=$(aws rds describe-db-instances --region "$region" --query "length(DBInstances)" 2>/dev/null || echo 0)
+    TOTAL_RDS_INSTANCES=$((TOTAL_RDS_INSTANCES + RDS_COUNT_IN_REGION))
+
+    # RDS Allocated Storage (in GB)
+    STORAGE_VALUES=$(aws rds describe-db-instances --region "$region" --query "DBInstances[].AllocatedStorage" --output text 2>/dev/null)
+    if [ -n "$STORAGE_VALUES" ]; then
+        for gb in $STORAGE_VALUES; do
+            # Ensure the value is a number before adding
+            if [[ "$gb" =~ ^[0-9]+$ ]]; then
+                TOTAL_RDS_STORAGE_GB=$((TOTAL_RDS_STORAGE_GB + gb))
             fi
-        done <<< "$RDS_INSTANCES_INFO"
+        done
     fi
 done
 

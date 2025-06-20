@@ -47,7 +47,6 @@ To accelerate the data gathering process for AWS users, this repository includes
 
 Before running the script, you must have the following installed and configured:
 1.  **AWS CLI**: [Installation Guide](https://aws.amazon.com/cli/)
-2.  **jq**: [Installation Guide](https://stedolan.github.io/jq/download/) (A command-line JSON processor)
 
 ### How to Run
 
