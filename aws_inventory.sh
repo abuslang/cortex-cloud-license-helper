@@ -96,8 +96,13 @@ echo "Serverless Functions (Lambda):                 $TOTAL_LAMBDA_FUNCTIONS"
 echo "Container Images in Registries (ECR Images):   $TOTAL_ECR_IMAGES"
 echo "Cloud Buckets (S3):                            $S3_BUCKETS"
 echo "Managed Cloud Database (PaaS - RDS Instances): $TOTAL_RDS_INSTANCES"
-echo "DBaaS (Total GB Stored - RDS Allocated Storage): $TOTAL_RDS_STORAGE_GB"
-echo "  => NOTE: To get TB, divide this value by 1024."
+
+# Calculate TB from GB
+TOTAL_RDS_STORAGE_TB=$(echo "scale=2; $TOTAL_RDS_STORAGE_GB / 1024" | bc 2>/dev/null || echo "scale=2; $TOTAL_RDS_STORAGE_GB / 1024" | awk '{printf "%.2f", $1}')
+
+echo "DBaaS Storage:"
+echo "  - GB: $TOTAL_RDS_STORAGE_GB"
+echo "  - TB: $TOTAL_RDS_STORAGE_TB (use this value for DBaaS field)"
 echo ""
 echo "Manual Entry Required For:"
 echo " - SaaS Users"
@@ -105,7 +110,7 @@ echo " - Cloud ASM - Unmanaged Services"
 echo "-----------------------------------------------------"
 
 # --- Auto-populate Code Generation ---
-AUTO_POPULATE_CODE="vms:$TOTAL_EC2_INSTANCES,caas:$TOTAL_ECS_TASKS,sls:$TOTAL_LAMBDA_FUNCTIONS,img:$TOTAL_ECR_IMAGES,bkt:$S3_BUCKETS,paas:$TOTAL_RDS_INSTANCES,dbaas_gb:$TOTAL_RDS_STORAGE_GB"
+AUTO_POPULATE_CODE="vms:$TOTAL_EC2_INSTANCES,caas:$TOTAL_ECS_TASKS,sls:$TOTAL_LAMBDA_FUNCTIONS,img:$TOTAL_ECR_IMAGES,bkt:$S3_BUCKETS,paas:$TOTAL_RDS_INSTANCES,dbaas:$TOTAL_RDS_STORAGE_TB"
 echo ""
 echo "Auto-Populate Code (copy and paste this into the web tool):"
 echo "$AUTO_POPULATE_CODE"
