@@ -2,7 +2,7 @@
 
 !!!! NOT OFFICIALL !!!!
 
-**[Live Demo](https://abuslang.github.io/cortex-cloud-license-helper/)**
+**[Link to Workload Calculator](https://abuslang.github.io/cortex-cloud-license-helper/)**
 
 ## Overview
 
