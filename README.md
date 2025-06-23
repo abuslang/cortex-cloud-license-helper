@@ -25,9 +25,7 @@ To automate asset discovery in AWS, a dedicated shell script is provided. It que
 
 ### Required IAM Permissions
 
-The script requires an IAM principal (user or role) with read-only permissions for the services it queries. While the AWS-managed `ReadOnlyAccess` policy is sufficient, the recommended approach is to use a custom policy with least-privilege permissions.
-
-Create a new IAM policy with the following JSON definition:
+Permissions used:
 ```json
 {
     "Version": "2012-10-17",
