@@ -17,7 +17,7 @@ This tool provides an estimate of the Cortex Cloud licenses required for a given
 
 ## AWS Asset Inventory Script (`aws_inventory.sh`)
 
-To automate asset discovery in AWS, a dedicated shell script is provided. It queries the AWS API to count resources across all enabled regions.
+Shell script to query the AWS and Azure APIs to count resources across all enabled regions.
 
 ### Prerequisites
 
