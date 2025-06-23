@@ -15,17 +15,6 @@ This tool provides an estimate of the Cortex Cloud licenses required for a given
 
 ---
 
-## Online Estimator Usage
-
-The estimator provides a user-friendly interface to calculate license needs.
-
-#### Running Locally
-1.  Clone or download this repository.
-2.  Open the `index.html` file in a web browser.
-3.  Input the quantity for each asset category based on your environment's inventory.
-4.  The **Estimated Workloads** total will update in real-time at the bottom of the page.
-
-
 ## AWS Asset Inventory Script (`aws_inventory.sh`)
 
 To automate asset discovery in AWS, a dedicated shell script is provided. It queries the AWS API to count resources across all enabled regions.
